@@ -143,7 +143,7 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="grd_tipoproducto" method="post">
+			<form action="logica/grd_tipoproducto.php" method="post">
 				<div class="modal-header">						
 					<h4 class="modal-title">Agregar Tipo de producto</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -155,7 +155,7 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group">
 						<label>¿Es refrigerable?</label>
-						<input type="email" name="refrigerable" class="form-control" required>
+						<input type="text" name="refrigerable" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>¿Tiene vencimiento?</label>
