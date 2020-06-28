@@ -65,13 +65,13 @@ $(document).ready(function(){
               <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="despensa.php">Despensas</a>
+              <a class="nav-link" href="tabla_despensa.php">Despensas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Producto.php">Productos</a>
+              <a class="nav-link" href="tabla_Producto.php">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="distribuidor.php">Distribuidores</a>
+              <a class="nav-link" href="tabla_distribuidor.php">Distribuidores</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
@@ -89,7 +89,7 @@ $(document).ready(function(){
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Tabla de <b>Distribuidores</b></h2>
+						<h2>Tabla de <b>Despensas</b></h2>
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar despensa</span></a>
@@ -173,7 +173,11 @@ $(document).ready(function(){
 					<h4 class="modal-title">Editar Despensa</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
-				<div class="modal-body">							
+				<div class="modal-body">
+                <div class="form-group">
+						<label>Ingrese el codigo de la despensa a editar</label>
+						<input type="number" name="despensa" class="form-control" required>
+					</div>							
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
