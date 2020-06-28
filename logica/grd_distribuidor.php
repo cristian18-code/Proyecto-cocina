@@ -18,7 +18,7 @@
         echo '<script> alert("Registro exitoso"); </script>';
     }
     //Volver a la pagina
-    //header("location: ../tabla_distribuidor.php");
+    header("location: ../tabla_distribuidor.php");
     //cerrar conexion
     mysqli_close($conectar);
 ?>

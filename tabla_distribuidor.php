@@ -160,25 +160,25 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-body">	
 				<div class="form-group">
-						<label for="despensa">Nombre de la despensa a distribuir</label>
-						<select name="despensa" id="despensa">
-							<?php
-								echo '<option selected>------</option>';
-								foreach ($ejecutardes as $datodes) { 											
-								echo '<option value="' . $datodes['id_distribuidor'] . '">' . $datodes['nombre'] . '</option>';
-								}
-							?>
+						<label>Nombre de la despensa a distribuir</label>
+						<select name="despensa">
+						<option selected>-----</option>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+
+						<?php endwhile;?>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="producto">Nombre del producto a distribuir</label>
-						<select name="producto" id="producto">
-							<?php
-								echo '<option selected>------</option>';
-								foreach ($ejecutarpro as $datopro) { 											
-									echo '<option value="' . $datopro['id_producto'] . '">' . $datopro['nombre_producto'] . '</option>';
-								}
-							?>
+						<label>Nombre del producto a distribuir</label>
+						<select name="producto">
+						<option selected>-----</option>
+						<?php while($row2 = mysqli_fetch_array($ejecutarpro)):;?>
+
+							<option value="<?php echo $row2[0];?>"><?php echo $row2[2];?></option>
+
+						<?php endwhile;?>
 						</select>
 					</div>				
 					<div class="form-group">
