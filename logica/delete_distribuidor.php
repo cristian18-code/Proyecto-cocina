@@ -3,7 +3,7 @@
 
     $id_distribuidor = $_POST['id_distribuidor'];
 
-    $consulta = "DELETE * FROM distribuidor WHERE id_distribuidor = '$id_distribuidor'";
+    $consulta = "DELETE FROM distribuidor WHERE id_distribuidor = '$id_distribuidor'";
     //ejecutar consulta
     $delete = mysqli_query($conectar, $consulta);
     if (!$delete) {
