@@ -3,9 +3,6 @@
 	$consulta_distribuidor = "SELECT * FROM distribuidor";
 	$ejecutar = mysqli_query($conectar, $consulta_distribuidor);
 	mysqli_close($conectar);
-
-
-echo 'Hola';
 ?>
 <!DOCTYPE html>
 <html lang="es">
