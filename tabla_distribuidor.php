@@ -93,7 +93,8 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar distribuidor</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar distribuidor</span></a>						
+						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar distribuidor</span></a>
+						<a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
 					</div>
 				</div>
 			</div>
@@ -128,11 +129,7 @@ $(document).ready(function(){
 							echo '<td>' . $dato['nombredistribuidor'].'</td>';
 							echo '<td>' . $dato['ciudaddistribuidor'].'</td>';
 							echo '<td>' . $dato['correodistribuidor'].'</td>';
-						?>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
+						?>							
 						</tr>	
 						<?php	
 						}
@@ -146,7 +143,7 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="grd_distribuidor.php">
+			<form action="logica/grd_distribuidor.php" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Agregar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -177,19 +174,23 @@ $(document).ready(function(){
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="edit_distribuidor.php" method="post">
+			<form action="logica/edit_distribuidor.php" method="post">
 				<div class="modal-header">						
 					<h4 class="modal-title">Editar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
+				<div class="form-group">
+						<label>Ingrese el codigo del distribuidor a editar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
+					</div>
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>Ciudad</label>
-						<input type="email" name="ciudad" class="form-control" required>
+						<input type="text" name="ciudad" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>Correo</label>
@@ -208,11 +209,15 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="delete_distribuidor.php" method="POST">
+			<form action="logica/delete_distribuidor.php" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Eliminar distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
+				<div class="form-group">
+						<label>Ingrese el codigo del distribuidor a eliminar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
+					</div>
 				<div class="modal-body">					
 					<p>¿Esta seguro que desea eliminar este elemento?</p>
 					<p class="text-warning"><small>Esta accion no se puede deshacer.</small></p>
