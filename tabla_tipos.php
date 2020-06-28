@@ -88,8 +88,10 @@ $(document).ready(function(){
 						<h2>Tipos de <b>Productos</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Tipo</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a>						
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
+						<span>Agregar Tipo</span></a>
+						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
+						<span>Eliminar</span></a>						
 					</div>
 				</div>
 			</div>
@@ -112,24 +114,26 @@ $(document).ready(function(){
 							<?php	
 														
 								foreach ($ejecutar as $dato) {
-
-									echo'<tr>';
-										echo '<td>';
-											echo '<span class="custom-checkbox">';
-												echo '<input type="checkbox" id="checkbox1" name="options[]" value="1">';
-												echo '<label for="checkbox1"></label>';
-											echo '</span>';
-										echo '</td>';
+							?>			
+									<tr>
+										<td>
+											<span class="custom-checkbox">
+												<input type="checkbox" id="checkbox1" name="options[]" value="1">
+												<label for="checkbox1"></label>
+											</span>
+										</td>
+							<?php
 									echo '<td>' . $dato['id_tipo'].'</td>';
 									echo '<td>' . $dato['nombre'].'</td>';
 									echo '<td>' . $dato['es_refrigerable'].'</td>';
 									echo '<td>' . $dato['tiene_vencimiento'].'</td>';
 									echo '<td>';
-										echo '<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>';
-										echo '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>';
-									echo '</td>';
-									echo '</tr>';
-									
+							?>
+									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+									<a href="#editEmployeemodal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+									</td>
+									</tr>
+							<?php
 								}
           					?>							
 					</tr> 
@@ -155,11 +159,11 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group">
 						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" required>
+						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
 					</div>
 					<div class="form-group">
 						<label>¿Tiene vencimiento?</label>
-						<input class="form-control" name="vencimiento" required>
+						<input class="form-control" name="vencimiento" placeholder="si/no" required>
 					</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -173,32 +177,27 @@ $(document).ready(function(){
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form action="logica/grd_tipoproducto.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Edit Employee</h4>
+					<h4 class="modal-title">Agregar Tipo de producto</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
 					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" required>
+						<label>Nombre</label>
+						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
+						<label>¿Es refrigerable?</label>
+						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
 					</div>
 					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" required></textarea>
+						<label>¿Tiene vencimiento?</label>
+						<input class="form-control" name="vencimiento" placeholder="si/no" required>
 					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required>
-					</div>					
-				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Save">
+					<input type="submit" class="btn btn-success" value="Añadir">
 				</div>
 			</form>
 		</div>
@@ -208,18 +207,18 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form action="delete_tipo.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Delete Employee</h4>
+					<h4 class="modal-title">Eliminar tipo</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
-					<p>Are you sure you want to delete these Records?</p>
-					<p class="text-warning"><small>This action cannot be undone.</small></p>
+					<p>¿Esta seguro que desea eliminar este tipo?</p>
+					<p class="text-warning"><small>Esta accion no se puede deshacer.</small></p>
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-danger" value="Delete">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
 				</div>
 			</form>
 		</div>
