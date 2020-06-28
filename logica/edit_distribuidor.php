@@ -2,13 +2,18 @@
     require 'conexion.php';
 
     $id_distribuidor = $_POST['id_distribuidor'];
+    $despensa = $_POST['despensa'];
+    $producto = $_POST['producto'];
     $nombre = $_POST['nombre'];
     $ciudad = $_POST['ciudad'];
     $correo = $_POST['correo'];
 
     //consulta
     $consulta = "UPDATE distribuidor
-    SET nombredistribuidor = '$nombre',
+    SET 
+    id_despensa = '$despensa',
+    id_producto = '$producto',
+    nombredistribuidor = '$nombre',
     ciudaddistribuidor = '$ciudad', 
     correodistribuidor = '$correo'
     WHERE id_distribuidor = '$id_distribuidor'";

@@ -9,6 +9,12 @@
 	//ver datos producto
 	$consulta_producto = "SELECT * FROM producto1";
 	$ejecutarpro = mysqli_query($conectar, $consulta_producto);
+	//ver datos despensa
+	$consulta_despensa = "SELECT * FROM despensa";
+	$ejecutardes2 = mysqli_query($conectar, $consulta_despensa);
+	//ver datos producto
+	$consulta_producto = "SELECT * FROM producto1";
+	$ejecutarpro2 = mysqli_query($conectar, $consulta_producto);
 	mysqli_close($conectar);
 
 
@@ -163,7 +169,7 @@ $(document).ready(function(){
 						<label>Nombre de la despensa a distribuir</label>
 						<select name="despensa" required>
 						<option selected>-----</option>
-						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes2)):;?>
 
 							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
 
@@ -174,7 +180,7 @@ $(document).ready(function(){
 						<label>Nombre del producto a distribuir</label>
 						<select name="producto" required>
 						<option selected>-----</option>	
-						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro2)):;?>
 
 							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
 
@@ -215,6 +221,28 @@ $(document).ready(function(){
 				<div class="form-group">
 						<label>Ingrese el codigo del distribuidor a editar</label>
 						<input type="number" name="id_distribuidor" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Nombre de la despensa a distribuir</label>
+						<select name="despensa" required>
+						<option selected>-----</option>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+
+						<?php endwhile;?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Nombre del producto a distribuir</label>
+						<select name="producto" required>
+						<option selected>-----</option>	
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
+
+						<?php endwhile;?>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>Nombre</label>
