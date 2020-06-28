@@ -295,7 +295,7 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/delete_distribuidor.php" method="POST">
+			<form action="logica/delete_producto.php" method="POST">
 				<div class="modal-header">						
 					<h4 class="modal-title">Eliminar producto</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
