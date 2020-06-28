@@ -1,14 +1,15 @@
 <?php
-	include 'logica/conexion.php';
-	$consulta_tipoproducto = "SELECT * FROM tipoproducto";
-	$ejecutar = mysqli_query($conectar, $consulta_tipoproducto);
+	require 'logica/conexion.php';
+	$consulta_distribuidor = "SELECT * FROM distribuidor";
+	$ejecutar = mysqli_query($conectar, $consulta_distribuidor);
 	mysqli_close($conectar);
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Tipos de productos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -85,13 +86,11 @@ $(document).ready(function(){
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Tipos de <b>Productos</b></h2>
+						<h2>Tabla de <b>Distribuidores</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
-						<span>Agregar Tipo</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
-						<span>Eliminar</span></a>						
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar distribuidor</span></a>
+						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar distribuidor</span></a>						
 					</div>
 				</div>
 			</div>
@@ -106,40 +105,37 @@ $(document).ready(function(){
 						</th>
 						<th>Codigo</th>
 						<th>Nombre</th>
-						<th>¿Refrigerable?</th>
-						<th>¿Tiene vencimiento?</th>
+						<th>ciudad</th>
+						<th>Correo</th>						
 					</tr>
 				</thead>
 				<tbody>					
-							<?php	
-														
-								foreach ($ejecutar as $dato) {
-							?>			
-									<tr>
-										<td>
-											<span class="custom-checkbox">
-												<input type="checkbox" id="checkbox1" name="options[]" value="1">
-												<label for="checkbox1"></label>
-											</span>
-										</td>
-							<?php							
-									echo '<td>' . $dato['id_tipo'].'</td>';
-									echo '<td>' . $dato['nombre'].'</td>';
-									echo '<td>' . $dato['es_refrigerable'].'</td>';
-									echo '<td>' . $dato['tiene_vencimiento'].'</td>';
-							?>
-										<td>
-											<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-											<a href="#editEmployeemodal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
-										</td>
-									</tr>
-							<?php
-								}
-          					?>							
-					</tr> 
+						<?php
+							foreach ($ejecutar as $dato) {
+						?>
+						<tr>	
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="options[]" value="1">
+									<label for="checkbox1"></label>
+								</span>
+							</td>	
+						<?php								
+							echo '<td>' . $dato['id_distribuidor'].'</td>';
+							echo '<td>' . $dato['nombredistribuidor'].'</td>';
+							echo '<td>' . $dato['ciudaddistribuidor'].'</td>';
+							echo '<td>' . $dato['correodistribuidor'].'</td>';
+						?>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>	
+						<?php	
+						}
+						?>											
 				</tbody>
-			</table>
-			</div>
+			</table>		
 		</div>
 	</div>        
 </div>
@@ -147,9 +143,9 @@ $(document).ready(function(){
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/grd_tipoproducto.php" method="post">
+			<form action="grd_distribuidor.php">
 				<div class="modal-header">						
-					<h4 class="modal-title">Agregar Tipo de producto</h4>
+					<h4 class="modal-title">Agregar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
@@ -158,16 +154,17 @@ $(document).ready(function(){
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
+						<label>ciudad</label>
+						<input type="text" name="ciudad" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Tiene vencimiento?</label>
-						<input class="form-control" name="vencimiento" placeholder="si/no" required>
-					</div>
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
+					</div>					
+				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Añadir">
+					<input type="submit" class="btn btn-success" value="Agregar">
 				</div>
 			</form>
 		</div>
@@ -177,9 +174,9 @@ $(document).ready(function(){
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/grd_tipoproducto.php" method="post">
+			<form action="edit_distribuidor.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Agregar Tipo de producto</h4>
+					<h4 class="modal-title">Editar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
@@ -188,16 +185,17 @@ $(document).ready(function(){
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
+						<label>Ciudad</label>
+						<input type="email" name="ciudad" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Tiene vencimiento?</label>
-						<input class="form-control" name="vencimiento" placeholder="si/no" required>
-					</div>
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
+					</div>					
+				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Añadir">
+					<input type="submit" class="btn btn-info" value="Actualizar">
 				</div>
 			</form>
 		</div>
@@ -207,13 +205,13 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="delete_tipo.php" method="post">
+			<form action="delete_distribuidor.php" method="POST">
 				<div class="modal-header">						
-					<h4 class="modal-title">Eliminar tipo</h4>
+					<h4 class="modal-title">Eliminar distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
-					<p>¿Esta seguro que desea eliminar este tipo?</p>
+					<p>¿Esta seguro que desea eliminar este elemento?</p>
 					<p class="text-warning"><small>Esta accion no se puede deshacer.</small></p>
 				</div>
 				<div class="modal-footer">
