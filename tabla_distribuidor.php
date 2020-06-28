@@ -161,7 +161,7 @@ $(document).ready(function(){
 				<div class="modal-body">	
 				<div class="form-group">
 						<label>Nombre de la despensa a distribuir</label>
-						<select name="despensa">
+						<select name="despensa" required>
 						<option selected>-----</option>
 						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
 
@@ -172,11 +172,11 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group">
 						<label>Nombre del producto a distribuir</label>
-						<select name="producto">
-						<option selected>-----</option>
-						<?php while($row2 = mysqli_fetch_array($ejecutarpro)):;?>
+						<select name="producto" required>
+						<option selected>-----</option>	
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
 
-							<option value="<?php echo $row2[0];?>"><?php echo $row2[2];?></option>
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
 
 						<?php endwhile;?>
 						</select>
