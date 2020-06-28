@@ -18,7 +18,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Productos</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,31 +32,13 @@
 
  <!-- Custom styles for this template -->
  <link href="css/estilo_index.css" rel="stylesheet">
-<script>
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-</script>
+ 
+ <!-- MDBootstrap Datatables  -->
+<link href="css/addons/datatables.min.css" rel="stylesheet">
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+
 </head>
 <body>
 
@@ -64,11 +46,11 @@ $(document).ready(function(){
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="index.html">KITCHEN</a>
+        <a class="navbar-brand" href="index.html">COCINA</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Inicio <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tabla_despensa.php">Despensas</a>
@@ -82,13 +64,12 @@ $(document).ready(function(){
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
           </form>
         </div>
 </nav>   
 
 <br> <br>
-
 <div class="container-xl">
 	<div class="table-responsive">
 		<div class="table-wrapper">
@@ -102,10 +83,19 @@ $(document).ready(function(){
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Producto</span></a>
 						<a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
 					</div>
-				</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6">
+                  <div id="dtBasicExample_filter" class="dataTables_filter">
+                    <label>
+              </label>
+            </div>
+          </div>
+        </div>
 			</div>
-			<table class="table table-striped table-hover">
-				<thead>
+			<table id="tabla_productos" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
 					<tr>
 						<th>
 							<span class="custom-checkbox">
@@ -124,39 +114,38 @@ $(document).ready(function(){
 						<th>Caducidad</th>						
 					</tr>
 				</thead>
-				<tbody>					
-						<?php
-							foreach ($ejecutarpro as $dato) {
-						?>
-						<tr>	
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox1" name="options[]" value="1">
-									<label for="checkbox1"></label>
-								</span>
-							</td>	
-						<?php
-							echo '<td>' . $dato['id_producto'].'</td>';
-							echo '<td>' . $dato['id_tipo'].'</td>';								
-							echo '<td>' . $dato['nombre_producto'].'</td>';
-							echo '<td>' . $dato['unidad_medida'].'</td>';
-							echo '<td>' . $dato['cantidad'].'</td>';
-							echo '<td>' . $dato['peso'].'</td>';
-							echo '<td>' . $dato['precio_compra'].'</td>';
-							echo '<td>' . $dato['fecha_compra'].'</td>';
-							echo '<td>' . $dato['fecha_vencimiento'].'</td>';
-						?>							
-						</tr>	
-						<?php	
-						}
-						?>											
-				</tbody>
-			</table>		
-		</div>
-	</div>        
-</div>
+  <tbody>
+  <?php
+    foreach ($ejecutarpro as $dato) {
+    ?>
+    <tr>	
+      <td>
+        <span class="custom-checkbox">
+          <input type="checkbox" id="checkbox1" name="options[]" value="1">
+          <label for="checkbox1"></label>
+        </span>
+      </td>	
+    <?php
+      echo '<td>' . $dato['id_producto'].'</td>';
+      echo '<td>' . $dato['id_tipo'].'</td>';								
+      echo '<td>' . $dato['nombre_producto'].'</td>';
+      echo '<td>' . $dato['unidad_medida'].'</td>';
+      echo '<td>' . $dato['cantidad'].'</td>';
+      echo '<td>' . $dato['peso'].'</td>';
+      echo '<td>' . $dato['precio_compra'].'</td>';
+      echo '<td>' . $dato['fecha_compra'].'</td>';
+      echo '<td>' . $dato['fecha_vencimiento'].'</td>';
+    ?>							
+    </tr>	
+    <?php	
+    }
+    ?>
+    </tbody>
+</table> 
+
 <!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
+  
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form action="logica/grd_producto.php" method="POST">
@@ -166,7 +155,7 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-body">	
 				<div class="form-group">
-						<label>Nombre del tipo de producto de la compra</label>
+						<label>Nombre del tipo de producto</label>
 						<select name="tipo" required>
 						<option selected></option>
 						<?php while($row1 = mysqli_fetch_array($ejecutartip)):;?>
@@ -201,7 +190,7 @@ $(document).ready(function(){
 						<input type="text" name="peso" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Precio de compra</label>
+						<label>Precio de Compra</label>
 						<input type="text" name="precio" class="form-control" placeholder="sin puntos ni comas" required>
 					</div>
 					<div class="form-group">
@@ -232,11 +221,11 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-body">					
 				<div class="form-group">
-						<label>Ingrese el codigo del producto a editar</label>
+						<label>Ingrese el codigo del producto</label>
 						<input type="number" name="producto" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Categoria a la que pertenece el producto</label>
+						<label>Categoria del Producto</label>
 						<select name="tipo" required>
 						<option selected></option>
 						<?php while($row1 = mysqli_fetch_array($ejecutartip2)):;?>
@@ -251,7 +240,7 @@ $(document).ready(function(){
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Unidad de medida</label>
+						<label>Unidad de Medida</label>
 						<select name="medida"><br>   
 							<option selected></option>     
 							<option value="gramos">Gramos</option>
@@ -271,15 +260,15 @@ $(document).ready(function(){
 						<input type="text" name="peso" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Precio de compra</label>
+						<label>Precio de Compra</label>
 						<input type="text" name="precio" class="form-control" placeholder="Sin puntos ni comas" required>
 					</div>	
 					<div class="form-group">
-						<label>Fecha de compra</label>
+						<label>Fecha de Compra</label>
 						<input type="date" name="fecha_compra" class="form-control" required>
 					</div>		
 					<div class="form-group">
-						<label>Fecha de vencimiento</label>
+						<label>Fecha de Vencimiento</label>
 						<input type="date" name="fecha_vencimiento" class="form-control" required>
 					</div>											
 				</div>
@@ -301,7 +290,7 @@ $(document).ready(function(){
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="form-group">
-						<label>Ingrese el codigo del producto a eliminar</label>
+						<label>Ingrese el codigo</label>
 						<input type="number" name="producto" class="form-control" required>
 					</div>
 				<div class="modal-body">					
@@ -316,5 +305,44 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
+<script type="application/javascript">
+$(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;                        
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;                        
+			});
+		} 
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#selectAll").prop("checked", false);
+		}
+	});
+});
+
+// Basic example
+$(document).ready(function () {
+  $('#tabla_productos').DataTable({
+    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+
+// Añade Clase 
+$(document).ready(function () {
+  $('#tabla_productos').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>
 </body>
 </html>

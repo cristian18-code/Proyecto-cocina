@@ -12,7 +12,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Despensas</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -58,11 +58,11 @@ $(document).ready(function(){
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="index.html">KITCHEN</a>
+        <a class="navbar-brand" href="index.html">COCINA</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Inicio <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tabla_despensa.php">Despensas</a>
@@ -98,9 +98,16 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
+
+ <!-- MDBootstrap Datatables  -->
+ <link href="css/addons/datatables.min.css" rel="stylesheet">
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+
+<table id="tabla_despensas" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                 <thead>
+                 <tr>
 						<th>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="selectAll">
@@ -109,11 +116,11 @@ $(document).ready(function(){
 						</th>
 						<th>Codigo</th>
 						<th>Nombre</th>
-						<th>ciudad</th>						
+						<th>Ciudad</th>						
 					</tr>
-				</thead>
-				<tbody>					
-						<?php
+                </thead>
+  <tbody>
+  <?php
 							foreach ($ejecutar as $dato) {
 						?>
 						<tr>	
@@ -131,12 +138,51 @@ $(document).ready(function(){
 						</tr>	
 						<?php	
 						}
-						?>											
-				</tbody>
-			</table>		
-		</div>
-	</div>        
-</div>
+						?>	
+</tbody>
+</table>
+
+
+
+<script type="application/javascript">
+$(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;                        
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;                        
+			});
+		} 
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#tabla_despensas").prop("checked", false);
+		}
+	});
+});
+
+// Basic example
+$(document).ready(function () {
+  $('#tabla_despensas').DataTable({
+    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+
+// Añade Clase 
+$(document).ready(function () {
+  $('#tabla_despensas').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>
 <!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
