@@ -7,13 +7,13 @@
     $correo = $_POST['correo'];
 
     //consulta
-    $consluta = "UPDATE distribuidor
+    $consulta = "UPDATE distribuidor
     SET nombredistribuidor = '$nombre',
     ciudaddistribuidor = '$ciudad', 
     correodistribuidor = '$correo'
     WHERE id_distribuidor = '$id_distribuidor'";
     //Ejecutar consulta
-    $actualizar = mysqli_query($conectar, $consluta);
+    $actualizar = mysqli_query($conectar, $consulta);
     if (!$actualizar) {
         echo '<script> alert("Error en la actualizacion"); </script>';
     } else {

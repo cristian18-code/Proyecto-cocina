@@ -1,12 +1,15 @@
 <?php
     require 'conexion.php';
 
+    $despensa = $_POST['despensa'];
+    $producto = $_POST['producto'];
     $nombre = $_POST['nombre'];
     $ciudad = $_POST['ciudad'];
     $correo = $_POST['correo'];
     //consulta
-    $insertar = "INSERT INTO distribuidor (nombredistribuidor, ciudaddistribuidor, correodistribuidor)
-    VALUES ('$nombre', '$ciudad', '$correo')";
+    $insertar = "INSERT INTO distribuidor
+    (id_despensa, id_producto, nombredistribuidor, ciudaddistribuidor, correodistribuidor)
+    VALUES ('$despensa', '$producto', '$nombre', '$ciudad', '$correo')";
     //Ejecutar consulta
     $registro = mysqli_query($conectar, $insertar);
     if (!$registro) {

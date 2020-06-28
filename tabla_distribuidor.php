@@ -1,8 +1,17 @@
 <?php
 	require 'logica/conexion.php';
+	//ver datos distribuidor
 	$consulta_distribuidor = "SELECT * FROM distribuidor";
-	$ejecutar = mysqli_query($conectar, $consulta_distribuidor);
+	$ejecutardis = mysqli_query($conectar, $consulta_distribuidor);
+//ver datos despensa
+	$consulta_despensa = "SELECT * FROM despensa";
+	$ejecutardes = mysqli_query($conectar, $consulta_despensa);
+	//ver datos producto
+	$consulta_producto = "SELECT * FROM producto1";
+	$ejecutarpro = mysqli_query($conectar, $consulta_producto);
 	mysqli_close($conectar);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -104,7 +113,9 @@ $(document).ready(function(){
 								<label for="selectAll"></label>
 							</span>
 						</th>
-						<th>Codigo</th>
+						<th>Codigo distribuidor</th>
+						<th>Codigo despensa</th>
+						<th>Codigo producto</th>
 						<th>Nombre</th>
 						<th>ciudad</th>
 						<th>Correo</th>						
@@ -112,7 +123,7 @@ $(document).ready(function(){
 				</thead>
 				<tbody>					
 						<?php
-							foreach ($ejecutar as $dato) {
+							foreach ($ejecutardis as $dato) {
 						?>
 						<tr>	
 							<td>
@@ -121,8 +132,10 @@ $(document).ready(function(){
 									<label for="checkbox1"></label>
 								</span>
 							</td>	
-						<?php								
+						<?php
 							echo '<td>' . $dato['id_distribuidor'].'</td>';
+							echo '<td>' . $dato['id_despensa'].'</td>';								
+							echo '<td>' . $dato['id_producto'].'</td>';
 							echo '<td>' . $dato['nombredistribuidor'].'</td>';
 							echo '<td>' . $dato['ciudaddistribuidor'].'</td>';
 							echo '<td>' . $dato['correodistribuidor'].'</td>';
@@ -145,7 +158,29 @@ $(document).ready(function(){
 					<h4 class="modal-title">Agregar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
-				<div class="modal-body">					
+				<div class="modal-body">	
+				<div class="form-group">
+						<label for="despensa">Nombre de la despensa a distribuir</label>
+						<select name="despensa" id="despensa">
+							<?php
+								echo '<option selected>------</option>';
+								foreach ($ejecutardes as $datodes) { 											
+								echo '<option value="' . $datodes['id_distribuidor'] . '">' . $datodes['nombre'] . '</option>';
+								}
+							?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="producto">Nombre del producto a distribuir</label>
+						<select name="producto" id="producto">
+							<?php
+								echo '<option selected>------</option>';
+								foreach ($ejecutarpro as $datopro) { 											
+									echo '<option value="' . $datopro['id_producto'] . '">' . $datopro['nombre_producto'] . '</option>';
+								}
+							?>
+						</select>
+					</div>				
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
