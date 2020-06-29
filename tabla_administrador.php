@@ -233,7 +233,7 @@ $(document).ready(function () {
 				<div class="modal-body">					
 				<div class="form-group">
 						<label>Ingrese el codigo del administrador a editar</label>
-						<input type="number" name="id_distribuidor" class="form-control" required>
+						<input type="number" name="administrador" class="form-control" required>
                     </div>
                     <div class="form-group">
 						<label>Usuario</label>
@@ -267,7 +267,7 @@ $(document).ready(function () {
 				</div>
 				<div class="form-group">
 						<label>Ingrese el codigo del Administrador a eliminar</label>
-						<input type="number" name="id_distribuidor" class="form-control" required>
+						<input type="number" name="administrador" class="form-control" required>
 					</div>
 				<div class="modal-body">					
 					<p>¿Esta seguro que desea eliminar este elemento?</p>
