@@ -1,14 +1,16 @@
 <?php
-	include 'logica/conexion.php';
-	$consulta_tipoproducto = "SELECT * FROM tipoproducto";
-	$ejecutar = mysqli_query($conectar, $consulta_tipoproducto);
+	require 'logica/conexion.php';
+	//ver datos tipo de producto
+	$consulta_tipos = "SELECT * FROM tipoproducto";
+	$ejecutar = mysqli_query($conectar, $consulta_tipos);
 	mysqli_close($conectar);
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Tipos de productos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Distribuidor</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -54,30 +56,30 @@ $(document).ready(function(){
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Tu cocina</a>
+        <a class="navbar-brand" href="index.html">COCINA</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="despensa.php">Despensas</a>
+              <a class="nav-link" href="tabla_despensa.php">Despensas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Producto.php">Productos</a>
+              <a class="nav-link" href="tabla_Productos.php">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="distribuidor.php">Distribuidores</a>
+              <a class="nav-link" href="tabla_distribuidor.php">Distribuidores</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
           </form>
         </div>
 </nav>   
 
-<br> <br>
+<br> <br><br> <br><br> 
 
 <div class="container-xl">
 	<div class="table-responsive">
@@ -85,19 +87,26 @@ $(document).ready(function(){
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Tipos de <b>Productos</b></h2>
+						<h2>Tabla de <b>Tipos de productos</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
-						<span>Agregar Tipo</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i>
-						<span>Eliminar</span></a>						
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Categoria</span></a>
+						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Categoria</span></a>
+						<a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
 					</div>
 				</div>
 			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
+<!-- MDBootstrap Datatables  -->
+<link href="css/addons/datatables.min.css" rel="stylesheet">
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+<br> <br><br> 
+
+
+<table id="tabla_tipos" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+					<thead>
+						<tr>
 						<th>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="selectAll">
@@ -106,68 +115,101 @@ $(document).ready(function(){
 						</th>
 						<th>Codigo</th>
 						<th>Nombre</th>
-						<th>¿Refrigerable?</th>
-						<th>¿Tiene vencimiento?</th>
+						<th>¿Es refrigerable?</th>
+						<th>¿Tiene vencimiento?</th>					
 					</tr>
-				</thead>
-				<tbody>					
-							<?php	
-														
-								foreach ($ejecutar as $dato) {
-							?>			
-									<tr>
-										<td>
-											<span class="custom-checkbox">
-												<input type="checkbox" id="checkbox1" name="options[]" value="1">
-												<label for="checkbox1"></label>
-											</span>
-										</td>
-							<?php							
-									echo '<td>' . $dato['id_tipo'].'</td>';
-									echo '<td>' . $dato['nombre'].'</td>';
-									echo '<td>' . $dato['es_refrigerable'].'</td>';
-									echo '<td>' . $dato['tiene_vencimiento'].'</td>';
-							?>
-										<td>
-											<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-											<a href="#editEmployeemodal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
-										</td>
-									</tr>
-							<?php
-								}
-          					?>							
-					</tr> 
-				</tbody>
-			</table>
-			</div>
-		</div>
-	</div>        
-</div>
+                </thead>
+  <tbody>
+  						<?php
+							foreach ($ejecutar as $dato) {
+						?>
+						<tr>	
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="options[]" value="1">
+									<label for="checkbox1"></label>
+								</span>
+							</td>	
+						<?php
+							echo '<td>' . $dato['id_tipo'].'</td>';
+							echo '<td>' . $dato['nombre'].'</td>';								
+							echo '<td>' . $dato['es_refrigerable'].'</td>';
+							echo '<td>' . $dato['tiene_vencimiento'].'</td>';
+						?>							
+						</tr>	
+						<?php	
+						}
+						?>
+</tbody>
+</table>
+
+
+
+<script type="application/javascript">
+$(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;                        
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;                        
+			});
+		} 
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#tabla_productos1").prop("checked", false);
+		}
+	});
+});
+
+// Basic example
+$(document).ready(function () {
+  $('#tabla_tipos').DataTable({
+    "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+
+// Añade Clase 
+$(document).ready(function () {
+  $('#tabla_tipos').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>
 <!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/grd_tipoproducto.php" method="post">
+			<form action="logica/grd_tipo.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Agregar Tipo de producto</h4>
+					<h4 class="modal-title">Agregar Categoria de productos</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
 					<div class="form-group">
-						<label>Nombre</label>
+						<label>Nombre de la categoria de productos</label>
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
+						<input type="text" name="refrigerable" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>¿Tiene vencimiento?</label>
-						<input class="form-control" name="vencimiento" placeholder="si/no" required>
-					</div>
+						<input type="text" name="vencimiento" class="form-control" required>
+					</div>					
+				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Añadir">
+					<input type="submit" class="btn btn-info" value="Agregar">
 				</div>
 			</form>
 		</div>
@@ -177,27 +219,54 @@ $(document).ready(function(){
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/grd_tipoproducto.php" method="post">
+			<form action="logica/edit_distribuidor.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Agregar Tipo de producto</h4>
+					<h4 class="modal-title">Editar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
+				<div class="form-group">
+						<label>Ingrese el codigo del distribuidor a editar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Nombre de la despensa a distribuir</label>
+						<select name="despensa" required>
+						<option selected>-----</option>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+
+						<?php endwhile;?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Nombre del producto a distribuir</label>
+						<select name="producto" required>
+						<option selected>-----</option>	
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
+
+						<?php endwhile;?>
+						</select>
+					</div>
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" placeholder="si/no" required>
+						<label>Ciudad</label>
+						<input type="text" name="ciudad" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Tiene vencimiento?</label>
-						<input class="form-control" name="vencimiento" placeholder="si/no" required>
-					</div>
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
+					</div>					
+				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Añadir">
+					<input type="submit" class="btn btn-info" value="Actualizar">
 				</div>
 			</form>
 		</div>
@@ -207,13 +276,17 @@ $(document).ready(function(){
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="delete_tipo.php" method="post">
+			<form action="logica/delete_distribuidor.php" method="POST">
 				<div class="modal-header">						
-					<h4 class="modal-title">Eliminar tipo</h4>
+					<h4 class="modal-title">Eliminar distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
+				<div class="form-group">
+						<label>Ingrese el codigo del distribuidor a eliminar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
+					</div>
 				<div class="modal-body">					
-					<p>¿Esta seguro que desea eliminar este tipo?</p>
+					<p>¿Esta seguro que desea eliminar este elemento?</p>
 					<p class="text-warning"><small>Esta accion no se puede deshacer.</small></p>
 				</div>
 				<div class="modal-footer">

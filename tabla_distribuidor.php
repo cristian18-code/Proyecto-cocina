@@ -118,7 +118,7 @@ $(document).ready(function(){
 <br> <br><br> 
 
 
-<table id="tabla_productos1" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="tabla_distribuidor" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                  <thead>
                     <tr>
 						<th>
@@ -183,14 +183,14 @@ $(document).ready(function(){
 	});
 	checkbox.click(function(){
 		if(!this.checked){
-			$("#tabla_productos1").prop("checked", false);
+			$("#tabla_distribuidor").prop("checked", false);
 		}
 	});
 });
 
 // Basic example
 $(document).ready(function () {
-  $('#tabla_productos1').DataTable({
+  $('#tabla_distribuidor').DataTable({
     "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
   });
   $('.dataTables_length').addClass('bs-select');
@@ -208,7 +208,7 @@ $(document).ready(function () {
 		<div class="modal-content">
 			<form action="logica/grd_distribuidor.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title"> Distribuidor</h4>
+					<h4 class="modal-title">Agregar Distribuidor</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">									
@@ -249,7 +249,7 @@ $(document).ready(function () {
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Actualizar">
+					<input type="submit" class="btn btn-info" value="Agregar">
 				</div>
 			</form>
 		</div>
@@ -273,7 +273,7 @@ $(document).ready(function () {
 						<label>Nombre de la despensa a distribuir</label>
 						<select name="despensa" required>
 						<option selected>-----</option>
-						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes2)):;?>
 
 							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
 
@@ -284,7 +284,7 @@ $(document).ready(function () {
 						<label>Nombre del producto a distribuir</label>
 						<select name="producto" required>
 						<option selected>-----</option>	
-						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro2)):;?>
 
 							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
 
