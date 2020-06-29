@@ -219,49 +219,27 @@ $(document).ready(function () {
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/edit_distribuidor.php" method="post">
+			<form action="logica/edit_tipo.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Editar Distribuidor</h4>
+					<h4 class="modal-title">Editar Categoria</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
 				<div class="form-group">
-						<label>Ingrese el codigo del distribuidor a editar</label>
-						<input type="number" name="id_distribuidor" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Nombre de la despensa a distribuir</label>
-						<select name="despensa" required>
-						<option selected>-----</option>
-						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
-
-							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
-
-						<?php endwhile;?>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Nombre del producto a distribuir</label>
-						<select name="producto" required>
-						<option selected>-----</option>	
-						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
-
-							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
-
-						<?php endwhile;?>
-						</select>
-					</div>
+						<label>Ingrese el codigo de la categoria a editar</label>
+						<input type="number" name="tipo" class="form-control" required>
+					</div>					
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Ciudad</label>
-						<input type="text" name="ciudad" class="form-control" required>
+						<label>¿Es refrigerable?</label>
+						<input type="text" name="refrigerable" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>Correo</label>
-						<input type="email" name="correo" class="form-control" required>
+						<label>¿Tiene vencimiento?</label>
+						<input type="text" name="vencimiento" class="form-control" required>
 					</div>					
 				</div>
 				<div class="modal-footer">
@@ -276,14 +254,14 @@ $(document).ready(function () {
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/delete_distribuidor.php" method="POST">
+			<form action="logica/delete_tipo.php" method="POST">
 				<div class="modal-header">						
-					<h4 class="modal-title">Eliminar distribuidor</h4>
+					<h4 class="modal-title">Eliminar Categoria</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="form-group">
-						<label>Ingrese el codigo del distribuidor a eliminar</label>
-						<input type="number" name="id_distribuidor" class="form-control" required>
+						<label>Ingrese el codigo de la categoria a eliminar</label>
+						<input type="number" name="tipo" class="form-control" required>
 					</div>
 				<div class="modal-body">					
 					<p>¿Esta seguro que desea eliminar este elemento?</p>

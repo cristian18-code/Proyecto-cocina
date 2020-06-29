@@ -1,13 +1,15 @@
 <?php
     require 'conexion.php';
     
+    $tipo = $_POST['tipo'];
     $nombre = $_POST['nombre'];
     $refrigerable = $_POST['refrigerable'];
     $vencimiento = $_POST['vencimiento'];
 
     //consulta
-    $consulta = "UPDATE tipoproducto SET nombre = '$$nombre', es_refrigerable = '$refrigerable',
-    tiene_vencimiento = '$vencimiento'";
+    $consulta = "UPDATE tipoproducto SET 
+    nombre = '$nombre', es_refrigerable = '$refrigerable',
+    tiene_vencimiento = '$vencimiento' WHERE id_tipo = '$tipo'";
     //Realizar consulta
     $editar = mysqli_query($conectar, $consulta);
     if (!$editar) {
