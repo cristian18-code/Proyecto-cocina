@@ -84,7 +84,10 @@ $(document).ready(function(){
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tabla_distribuidor.php">Distribuidores</a>
-            </li>
+			</li>
+			<li class="nav-item">
+            <a class="nav-link" href="tabla_administrador.php">Administradores</a>
+          </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -198,7 +201,7 @@ $(document).ready(function () {
 
 // Añade Clase 
 $(document).ready(function () {
-  $('#tabla_productos1').DataTable();
+  $('#tabla_distribuidor').DataTable();
   $('.dataTables_length').addClass('bs-select');
 });
 </script>

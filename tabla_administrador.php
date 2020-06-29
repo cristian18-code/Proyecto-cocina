@@ -1,9 +1,11 @@
 <?php
 	require 'logica/conexion.php';
-	//ver datos tipo de producto
-	$consulta_tipos = "SELECT * FROM tipoproducto";
-	$ejecutar = mysqli_query($conectar, $consulta_tipos);
+	//ver datos administrador
+	$consulta = "SELECT * FROM administrador";
+	$ejecutar = mysqli_query($conectar, $consulta);    
 	mysqli_close($conectar);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,15 +72,12 @@ $(document).ready(function(){
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tabla_distribuidor.php">Distribuidores</a>
-			</li>
-			<li class="nav-item">
-            <a class="nav-link" href="tabla_administrador.php">Administradores</a>
-          </li>
+            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-		  </form>
+          </form>
         </div>
 </nav>   
 
@@ -90,11 +89,11 @@ $(document).ready(function(){
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Tabla de <b>Tipos de productos</b></h2>
+						<h2>Tabla de <b>Administradores</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Categoria</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Categoria</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Administrador</span></a>
+						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar Administrador</span></a>
 						<a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
 					</div>
 				</div>
@@ -107,9 +106,9 @@ $(document).ready(function(){
 <br> <br><br> 
 
 
-<table id="tabla_tipos" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-					<thead>
-						<tr>
+<table id="tabla_administrador" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                 <thead>
+                    <tr>
 						<th>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="selectAll">
@@ -117,13 +116,13 @@ $(document).ready(function(){
 							</span>
 						</th>
 						<th>Codigo</th>
+						<th>usuario</th>
 						<th>Nombre</th>
-						<th>¿Es refrigerable?</th>
-						<th>¿Tiene vencimiento?</th>					
+						<th>Correo</th>						
 					</tr>
                 </thead>
   <tbody>
-  						<?php
+  <?php
 							foreach ($ejecutar as $dato) {
 						?>
 						<tr>	
@@ -134,10 +133,10 @@ $(document).ready(function(){
 								</span>
 							</td>	
 						<?php
-							echo '<td>' . $dato['id_tipo'].'</td>';
-							echo '<td>' . $dato['nombre'].'</td>';								
-							echo '<td>' . $dato['es_refrigerable'].'</td>';
-							echo '<td>' . $dato['tiene_vencimiento'].'</td>';
+							echo '<td>' . $dato['id_administrador'].'</td>';
+							echo '<td>' . $dato['usuario'].'</td>';								
+                            echo '<td>' . $dato['nombre'].'</td>';
+                            echo '<td>' . $dato['correo'].'</td>';
 						?>							
 						</tr>	
 						<?php	
@@ -168,14 +167,14 @@ $(document).ready(function(){
 	});
 	checkbox.click(function(){
 		if(!this.checked){
-			$("#tabla_productos1").prop("checked", false);
+			$("#tabla_administrador").prop("checked", false);
 		}
 	});
 });
 
 // Basic example
 $(document).ready(function () {
-  $('#tabla_tipos').DataTable({
+  $('#tabla_administrador').DataTable({
     "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
   });
   $('.dataTables_length').addClass('bs-select');
@@ -183,7 +182,7 @@ $(document).ready(function () {
 
 // Añade Clase 
 $(document).ready(function () {
-  $('#tabla_tipos').DataTable();
+  $('#tabla_administrador').DataTable();
   $('.dataTables_length').addClass('bs-select');
 });
 </script>
@@ -191,23 +190,27 @@ $(document).ready(function () {
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/grd_tipo.php" method="post">
+			<form action="logica/grd_administrador.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Agregar Categoria de productos</h4>
+					<h4 class="modal-title">Agregar Administrador</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
-				<div class="modal-body">					
+				<div class="modal-body">									
 					<div class="form-group">
-						<label>Nombre de la categoria de productos</label>
+						<label>Usuario</label>
+						<input type="text" name="usuario" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
 					</div>
 					<div class="form-group">
-						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>¿Tiene vencimiento?</label>
-						<input type="text" name="vencimiento" class="form-control" required>
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+						<label>Contraseña</label>
+						<input type="password" name="contraseña" class="form-control" required>
 					</div>					
 				</div>
 				<div class="modal-footer">
@@ -222,27 +225,27 @@ $(document).ready(function () {
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/edit_tipo.php" method="post">
+			<form action="logica/edit_administrador.php" method="post">
 				<div class="modal-header">						
-					<h4 class="modal-title">Editar Categoria</h4>
+					<h4 class="modal-title">Editar Administrador</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
 				<div class="form-group">
-						<label>Ingrese el codigo de la categoria a editar</label>
-						<input type="number" name="tipo" class="form-control" required>
+						<label>Ingrese el codigo del administrador a editar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+						<label>Usuario</label>
+						<input type="text" name="usuario" class="form-control" required>
 					</div>					
 					<div class="form-group">
 						<label>Nombre</label>
 						<input type="text" name="nombre" class="form-control" required>
-					</div>
+					</div>					
 					<div class="form-group">
-						<label>¿Es refrigerable?</label>
-						<input type="text" name="refrigerable" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>¿Tiene vencimiento?</label>
-						<input type="text" name="vencimiento" class="form-control" required>
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
 					</div>					
 				</div>
 				<div class="modal-footer">
@@ -257,14 +260,14 @@ $(document).ready(function () {
 <div id="deleteEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="logica/delete_tipo.php" method="POST">
+			<form action="logica/delete_administrador.php" method="POST">
 				<div class="modal-header">						
-					<h4 class="modal-title">Eliminar Categoria</h4>
+					<h4 class="modal-title">Eliminar Administrador</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="form-group">
-						<label>Ingrese el codigo de la categoria a eliminar</label>
-						<input type="number" name="tipo" class="form-control" required>
+						<label>Ingrese el codigo del Administrador a eliminar</label>
+						<input type="number" name="id_distribuidor" class="form-control" required>
 					</div>
 				<div class="modal-body">					
 					<p>¿Esta seguro que desea eliminar este elemento?</p>
