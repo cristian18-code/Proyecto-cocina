@@ -203,6 +203,59 @@ $(document).ready(function () {
 });
 </script>
 <!-- Edit Modal HTML -->
+<div id="addEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="logica/grd_distribuidor.php" method="post">
+				<div class="modal-header">						
+					<h4 class="modal-title"> Distribuidor</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">									
+					<div class="form-group">
+						<label>Nombre de la despensa a distribuir</label>
+						<select name="despensa" required>
+						<option selected>-----</option>
+						<?php while($row1 = mysqli_fetch_array($ejecutardes)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+
+						<?php endwhile;?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Nombre del producto a distribuir</label>
+						<select name="producto" required>
+						<option selected>-----</option>	
+						<?php while($row1 = mysqli_fetch_array($ejecutarpro)):;?>
+
+							<option value="<?php echo $row1[0];?>"><?php echo $row1[2];?></option>
+
+						<?php endwhile;?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Nombre</label>
+						<input type="text" name="nombre" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Ciudad</label>
+						<input type="text" name="ciudad" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label>Correo</label>
+						<input type="email" name="correo" class="form-control" required>
+					</div>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-info" value="Actualizar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Edit Modal HTML -->
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
